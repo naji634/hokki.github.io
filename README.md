@@ -1,4 +1,3 @@
-![image](https://github.com/user-attachments/assets/a3a79a39-0b1d-47cd-b38d-030363a209af)<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">

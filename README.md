@@ -88,7 +88,7 @@
       } else {
         // 終わったら警告ポップアップ
         setTimeout(() => {
-          alert("端末情報が送信されました。これ以上の情報漏洩を防ぐのために再起動してください。");
+          alert("⚠️ 緊急警告：あなたのデバイスはランサムウェアに感染しました。");
         }, 1500);
       }
     }
@@ -100,6 +100,46 @@
       fakeTerminal();
       document.documentElement.requestFullscreen?.();
     };
+          // エラー音再生開始
+      document.getElementById("alert-sound").play();
+
+      const msg = `
+const msgHTML = `
+<br><br>
+💀 このデバイスは遠隔操作されています。パスワード、写真、クレジット情報、SNS履歴も含まれます。<br><br>
+復号化には100,000円の振り込みが必要です。<br>
+支払い期限を過ぎると、データは完全に削除され復元不可能になります。<br><br>
+📥 振込先: <a href="https://naji634.github.io/fakesite-v2/" target="_blank" style="color: cyan;">https://naji634.github.io/fakesite-v2/</a><br><br>
+🔒 注意：再起動・電源オフ・第三者への通報は、即時データ削除の対象となります。
+`;
+document.getElementById("message").innerHTML = msgHTML;
+
+
+      const chat = document.getElementById("chat");
+      chat.style.display = "block";
+
+      const messages = [
+        { sender: "attacker", text: "こんにちは。すべてのファイルを預かっています。" },
+        { sender: "attacker", text: "復元したければ金を払え。24時間以内だ。" },
+           { sender: "attacker", text: "払えば解除キーを送る。払わなければ全削除だ。" },
+      ];
+
+      messages.forEach((msg, index) => {
+        setTimeout(() => {
+          const div = document.createElement("div");
+          div.className = `chat-message ${msg.sender}`;
+          div.textContent = (msg.sender === "user" ? "あなた: " : "Unkown user: ") + msg.text;
+          chat.appendChild(div);
+          chat.scrollTop = chat.scrollHeight;
+
+          // ビープ音
+          document.getElementById("beep").play();
+        }, 4000 * index);
+      });
+    }
+  </script>
+</body>
+</html>
   </script>
 </body>
 </html>

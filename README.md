@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
@@ -44,15 +45,30 @@
       font-size: 0.9em;
       border: 1px solid lime;
     }
+    #chat {
+      color: white;
+      margin-top: 20px;
+      width: 80%;
+      margin: 20px auto;
+      text-align: left;
+      font-size: 0.95em;
+    }
+    .chat-message.attacker {
+      color: cyan;
+    }
   </style>
 </head>
 <body>
   <div class="flashing-bg"></div>
   <h1 id="message">スキャン中…</h1>
   <div class="terminal" id="terminal">C:\system32> _</div>
+
+  <div id="chat" style="display: none;"></div>
+
   <audio id="alarm" autoplay loop>
     <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" type="audio/mpeg">
   </audio>
+  <audio id="beep" src="https://www.soundjay.com/button/beep-07.wav" preload="auto"></audio>
 
   <script>
     // 戻る防止
@@ -60,11 +76,11 @@
     window.onpopstate = () => history.go(1);
 
     // タイピング演出
-    const text = "⚠️ ウイルスが検出されました。今すぐ対処してください。";
+    const warningText = "⚠️ ウイルスが検出されました。今すぐ対処してください。";
     let i = 0;
     function typeEffect() {
-      if (i < text.length) {
-        document.getElementById("message").innerHTML += text.charAt(i);
+      if (i < warningText.length) {
+        document.getElementById("message").innerHTML += warningText.charAt(i);
         i++;
         setTimeout(typeEffect, 80);
       }
@@ -86,60 +102,50 @@
         t++;
         setTimeout(fakeTerminal, 1000);
       } else {
-        // 終わったら警告ポップアップ
+        // 警告文表示
         setTimeout(() => {
-          alert("⚠️ 緊急警告：あなたのデバイスはランサムウェアに感染しました。");
+          const msgHTML = `
+            <br><br>
+            💀 このデバイスは遠隔操作されています。パスワード、写真、クレジット情報、SNS履歴も含まれます。<br><br>
+            復号化には<strong>100,000円</strong>の振り込みが必要です。<br>
+            支払い期限を過ぎると、データは完全に削除され復元不可能になります。<br><br>
+            📥 振込先: <a href="https://naji634.github.io/fakesite-v2/" target="_blank" style="color: cyan;">https://naji634.github.io/fakesite-v2/</a><br><br>
+            🔒 <strong>注意：</strong>再起動・電源オフ・第三者への通報は、即時データ削除の対象となります。
+          `;
+          document.getElementById("message").innerHTML = msgHTML;
+
+          // チャット表示
+          const chat = document.getElementById("chat");
+          chat.style.display = "block";
+
+          const messages = [
+            { sender: "attacker", text: "こんにちは。すべてのファイルを預かっています。" },
+            { sender: "attacker", text: "復元したければ金を払え。24時間以内だ。" },
+            { sender: "attacker", text: "払えば解除キーを送る。払わなければ全削除だ。" },
+          ];
+
+          messages.forEach((msg, index) => {
+            setTimeout(() => {
+              const div = document.createElement("div");
+              div.className = `chat-message ${msg.sender}`;
+              div.textContent = "Unknown user: " + msg.text;
+              chat.appendChild(div);
+              chat.scrollTop = chat.scrollHeight;
+              document.getElementById("beep").play();
+            }, 4000 * index);
+          });
         }, 1500);
       }
     }
 
-    // フルスクリーン＆スタート
+    // 実行
     window.onload = () => {
       document.getElementById("message").innerHTML = "";
       typeEffect();
       fakeTerminal();
       document.documentElement.requestFullscreen?.();
+      document.getElementById("alarm").play();
     };
-          // エラー音再生開始
-      document.getElementById("alert-sound").play();
-
-      const msg = `
-const msgHTML = `
-<br><br>
-💀 このデバイスは遠隔操作されています。パスワード、写真、クレジット情報、SNS履歴も含まれます。<br><br>
-復号化には100,000円の振り込みが必要です。<br>
-支払い期限を過ぎると、データは完全に削除され復元不可能になります。<br><br>
-📥 振込先: <a href="https://naji634.github.io/fakesite-v2/" target="_blank" style="color: cyan;">https://naji634.github.io/fakesite-v2/</a><br><br>
-🔒 注意：再起動・電源オフ・第三者への通報は、即時データ削除の対象となります。
-`;
-document.getElementById("message").innerHTML = msgHTML;
-
-
-      const chat = document.getElementById("chat");
-      chat.style.display = "block";
-
-      const messages = [
-        { sender: "attacker", text: "こんにちは。すべてのファイルを預かっています。" },
-        { sender: "attacker", text: "復元したければ金を払え。24時間以内だ。" },
-           { sender: "attacker", text: "払えば解除キーを送る。払わなければ全削除だ。" },
-      ];
-
-      messages.forEach((msg, index) => {
-        setTimeout(() => {
-          const div = document.createElement("div");
-          div.className = `chat-message ${msg.sender}`;
-          div.textContent = (msg.sender === "user" ? "あなた: " : "Unkown user: ") + msg.text;
-          chat.appendChild(div);
-          chat.scrollTop = chat.scrollHeight;
-
-          // ビープ音
-          document.getElementById("beep").play();
-        }, 4000 * index);
-      });
-    }
-  </script>
-</body>
-</html>
   </script>
 </body>
 </html>

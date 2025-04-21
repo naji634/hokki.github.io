@@ -61,6 +61,30 @@
     .chat-message.attacker {
       color: cyan;
     }
+    .mail-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px; /* 左上にしたいなら right→left に変更 */
+  background-color: #222;
+  color: white;
+  border-left: 4px solid cyan;
+  padding: 10px 15px;
+  margin-top: 10px;
+  border-radius: 5px;
+  font-size: 0.85em;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.5s ease;
+  max-width: 250px;
+  z-index: 9999;
+}
+
+.mail-notification.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
   </style>
 </head>
 <body onbeforeunload="return 'ページを離れるとデータは失われます。続けますか？';">
@@ -158,6 +182,38 @@
     }
   });
 </script>
+<script>
+  const messages = [
+    { sender: "attacker", text: "こんにちは。すべてのファイルを預かっています。" },
+    { sender: "attacker", text: "復元したければ金を払え。24時間以内だ。" },
+    { sender: "attacker", text: "払えば解除キーを送る。払わなければ全削除だ。" },
+  ];
 
+  function showMailNotification(message) {
+    const container = document.getElementById("mailContainer");
+    const div = document.createElement("div");
+    div.className = "mail-notification";
+    div.textContent = "📩 新着メッセージ: " + message;
+    container.appendChild(div);
+
+    // アニメーション表示
+    setTimeout(() => div.classList.add("show"), 100);
+
+    // 自動削除
+    setTimeout(() => {
+      div.classList.remove("show");
+      setTimeout(() => div.remove(), 500);
+    }, 6000);
+  }
+
+  // 順番に表示
+  messages.forEach((msg, index) => {
+    setTimeout(() => {
+      showMailNotification(msg.text);
+      document.getElementById("beep").play(); // 効果音
+    }, index * 7000);
+  });
+</script>
+<div id="mailContainer"></div>
 </body>
 </html>

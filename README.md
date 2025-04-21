@@ -148,5 +148,16 @@
       document.getElementById("alarm").play();
     };
   </script>
+  <script>
+  let clicked = false;
+
+  document.addEventListener("click", () => {
+    if (!clicked) {
+      clicked = true;
+      alert("⚠️ 緊急対応が必要です！画面内のリンクをすぐにクリックしてください！");
+    }
+  });
+</script>
+
 </body>
 </html>

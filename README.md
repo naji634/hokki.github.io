@@ -195,7 +195,7 @@
     const container = document.getElementById("mailContainer");
     const div = document.createElement("div");
     div.className = "mail-notification";
-    div.textContent = "📩 新着メッセージ: " + message;
+    div.textContent = "unkown user: " + message;
     container.appendChild(div);
 
     // アニメーション表示

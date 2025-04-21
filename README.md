@@ -145,9 +145,10 @@
           chat.style.display = "block";
 
           const messages = [
-            { sender: "attacker", text: "こんにちは。すべてのファイルを預かっています。" },
+            { sender: "attacker", text: "こんにちは。すべてのファイルを預かっている。" },
             { sender: "attacker", text: "復元したければ金を払え。24時間以内だ。" },
             { sender: "attacker", text: "払えば解除キーを送る。払わなければ全削除だ。" },
+            { sender: "attacker", text: "さあ。クリックしろ。" },
           ];
 
           messages.forEach((msg, index) => {

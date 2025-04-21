@@ -12,7 +12,7 @@
       color: red;
       font-family: 'Courier New', monospace;
       text-align: center;
-      overflow-y: scroll;
+      overflow-y: auto;
       overscroll-behavior: none;
       touch-action: none;
     }

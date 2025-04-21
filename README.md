@@ -108,11 +108,11 @@
       } else {
         setTimeout(() => {
           const msgHTML = `
-            <br><br>
-            \uD83D\uDC80 このデバイスは遠隔操作されています。パスワード、写真、クレジット情報、SNS履歴も含まれます。<br><br>
-            復号化には<strong>100,000円</strong>の振り込みが必要です。<br>
-            支払い期限を過ぎると、データは完全に削除され復元不可能になります。<br><br>
-            \uD83D\uDCE5 振込先: <a href="https://naji634.github.io/fakesite-v2/" target="_blank" style="color: cyan;">https://naji634.github.io/fakesite-v2/</a><br><br>
+           <br><br>
+ここをクリック👉: <a href="https://naji634.github.io/fakesite-v2/" target="_blank" style="color: cyan;">https://naji634.github.io/fakesite-v2/</a><br><br>
+\uD83D\uDC80 このデバイスは遠隔操作されています。パスワード、写真、クレジット情報、SNS履歴も含まれます。<br><br>
+復号化には<strong>100,000円</strong>の振り込みが必要です。<br>
+支払い期限を過ぎると、データは完全に削除され復元不可能になります。<br><br>
             \uD83D\uDD10 <strong>注意：</strong>再起動・電源オフ・第三者への通報は、即時データ削除の対象となります。
           `;
           document.getElementById("message").innerHTML = msgHTML;

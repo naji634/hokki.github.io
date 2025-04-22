@@ -178,7 +178,7 @@
   document.addEventListener("click", () => {
     if (!clicked) {
       clicked = true;
-      alert("⚠️ 緊急対応が必要です！画面内のリンクをすぐにクリックしてください！");
+      alert("⚠️ 外部アクセス解析:このデバイスは遠隔で管理されています。直ちに問題を解決してください。");
     }
   });
 </script>

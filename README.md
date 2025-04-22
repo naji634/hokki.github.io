@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
@@ -12,9 +11,9 @@
       color: red;
       font-family: 'Courier New', monospace;
       text-align: center;
-      overflow-y: auto;
+      overflow-y: scroll;
       overscroll-behavior: none;
-      touch-action: none;
+      touch-action: auto;
     }
     h1 {
       font-size: 2em;

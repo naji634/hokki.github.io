@@ -172,15 +172,13 @@
       document.getElementById("alarm").play();
     };
   </script>
-  <script>
-  let clicked = false;
-
-  document.addEventListener("click", () => {
-    if (!clicked) {
-      clicked = true;
-      alert("McAfeeセキュリティサポート：ご安心ください。外部アクセス者からのURLを安全なサイトの書き換えに成功しました。");
-    }
-  });
+  <body onload="showFakeAlert()">
+<script>
+  function showFakeAlert() {
+    setTimeout(function() {
+      alert("このページは「フェイク警告・脅迫風の演出」です。実際のウイルスや攻撃コードでは 一切ありません。また個人情報も一切保存を行いませんのでご安心ください。 );
+     }, 10000);
+  }
 </script>
 <script>
   const messages = [
